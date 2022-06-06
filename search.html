@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        input { 
+            border: 3px solid rgb(42, 211, 0);
+            border-radius: 3px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="keyword">
+        <p v-for="user in filteredUsers" :key="user">{{ user }}</p>
+    </div>
+
+    <script>
+        new Vue({ 
+            el: '#app',
+            data: {
+                keyword: '',
+                users: ['佐藤', '山田', '鈴木', '田中']
+            },
+            computed: {
+                filteredUsers: function() {
+                    var users = [];
+                    for(var i in this.users) {
+                        var user = this.users[i];
+                        if(user.indexOf(this.keyword) !== -1) {
+                            users.push(user);
+                        }
+                    }
+                    return users;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

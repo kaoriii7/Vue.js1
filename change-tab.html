@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .tab_container {
+            display: flex;
+
+        }
+
+        p {
+            width: 100px;
+            border: 1px solid rgb(218, 218, 218);
+            text-align: center;
+            margin: 0;
+        }
+
+        p:nth-child(n+2) {
+            border-left: none;
+        }
+
+        p:hover {
+            background: black;
+            color: white;
+            transition: .4s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="tab_container">
+            <p v-on:click="change('1')" v-bind:class="{'tab': isActive === '1'}">タブ１</p>
+            <p v-on:click="change('2')" v-bind:class="{'tab': isActive === '2'}">タブ２</p>
+            <p v-on:click="change('3')" v-bind:class="{'tab': isActive === '3'}">タブ３</p>
+        </div>
+        <div class="content_container">
+            <div v-if="isActive === '1'">コンテンツ１</div>
+            <div v-else-if="isActive === '2'">コンテンツ２</div>
+            <div v-else-if="isActive === '3'">コンテンツ３</div>
+        </div>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                isActive: '1'
+            },
+            methods: {
+                change: function(num) {
+                    this.isActive = num
+                }
+            }
+        });
+    </script>
+</body>
+</html>
